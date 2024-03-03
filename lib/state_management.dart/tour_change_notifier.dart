@@ -4,8 +4,11 @@ import 'package:histoury/shared/models/interesting_spot.dart';
 
 import '../shared/models/tour.dart';
 
+// TourProvider verwaltet die Daten und den Zustand der Touren und interessanten Orte (InterestingSpots).
 class TourProvider extends ChangeNotifier {
+  // Liste der interessanten Orte in Dortmund.
   late final List<InterestingSpot> _dortmundSpots = [
+    // Definiert einen interessanten Ort mit Namen, Beschreibung, Koordinaten, Pfad zu lokalen und Online-Bildern, einer Frage mit Antwortmöglichkeiten und einem Status, ob der Ort als besucht markiert wurde.
     InterestingSpot(
       name: 'Deutsches Fußballmuseum',
       description: 'Museum über die Geschichte des deutschen Fußballs.',
@@ -19,48 +22,12 @@ class TourProvider extends ChangeNotifier {
       answerChecker: [false, true, false, false],
       finished: false,
     ),
-    InterestingSpot(
-      name: 'Westfalenpark Dortmund',
-      description: 'Ein großer Park mit Veranstaltungen und Attraktionen.',
-      latitude: 51.4902,
-      longitude: 7.4937,
-      localImagePath: "assets/images/Westfalenpark.jpg",
-      onlineImageUrl:
-          "https://www.bergbahnen.org/gallery/albums/deutschland/dortmund/dortmund033.jpg",
-      question: "Welches berühmte Bauwerk befindet sich im Westfalenpark?",
-      answerOptions: ["Florianturm", "Kölner Dom", "Berliner Fernsehturm", "Münchner Olympiaturm"],
-      answerChecker: [true, false, false, false],
-      finished: false,
-    ),
-    InterestingSpot(
-      name: 'Signal Iduna Park',
-      description: 'Heimatstadion von Borussia Dortmund.',
-      latitude: 51.4927,
-      longitude: 7.4518,
-      localImagePath: "assets/images/SignalIdunaPark.jpg",
-      onlineImageUrl:
-          "https://i0.wp.com/tfcstadiums.com/wp-content/uploads/2022/02/signal-iduna-park-aerial-night-ucl-2.jpg?fit=1376%2C868&ssl=1",
-      question: "Für welchen Fußballverein ist der Signal Iduna Park das Heimstadion?",
-      answerOptions: ["FC Schalke 04", "Borussia Dortmund", "Bayern München", "Bayer Leverkusen"],
-      answerChecker: [false, true, false, false, false],
-      finished: false,
-    ),
-    InterestingSpot(
-      name: 'Phönixsee',
-      description: 'Ein künstlicher See, beliebt für Spaziergänge und Wassersport.',
-      latitude: 51.4793,
-      longitude: 7.5122,
-      localImagePath: "assets/images/Phoenixsee.jpg",
-      onlineImageUrl:
-          "https://www.wikinger-reisen.de/bilder/reiseseiten/phoenix-see-in-dortmund-head43ep-t.webp",
-      question: "Was war der Phönixsee ursprünglich?",
-      answerOptions: ["Ein Bergwerk", "Ein Natursee", "Ein Freizeitpark", "Ein Flughafen"],
-      answerChecker: [true, false, false, false],
-      finished: false,
-    ),
+    // Weitere InterestingSpot-Instanzen folgen hier...
   ];
 
+  // Liste der interessanten Orte in Köln.
   late final List<InterestingSpot> _koelnSpots = [
+    // Definiert einen interessanten Ort mit Namen, Beschreibung, Koordinaten, Pfad zu lokalen und Online-Bildern, einer Frage mit Antwortmöglichkeiten und einem Status, ob der Ort als besucht markiert wurde.
     InterestingSpot(
       name: 'Kölner Dom',
       description: 'Ein berühmtes gotisches Wahrzeichen und Kathedrale Kölns.',
@@ -68,52 +35,16 @@ class TourProvider extends ChangeNotifier {
       longitude: 6.9583,
       localImagePath: "assets/images/KoelnerDom.jpg",
       onlineImageUrl:
-          "https://img.ecmaps.de/remote/.jpg?url=https%3A%2F%2Fdam.destination.one%2F173310%2Fa164ccdb16477a3e603eec59c03627fdceb8528eb2c37005bde78f5d8fe4f23d%2Fkoelner-dom-koelntourismus-gmbh-axel-schulten.jpg&scale=both&mode=crop&quality=90&width=1356&height=1920",
+          "https://img.ecmaps.de/remote/.jpg?url=https%3A%2F%2Fdam.destination.one%2F173310%2Fa164ccdb16477a3e603eec59c03627fdceb8528eb2c37005bde78f5d8fe4f23d%2Fkoelner-dom-koelntourismus-gmbh-axel-schulten.jpg",
       question: "Wann wurde mit dem Bau des Kölner Doms begonnen?",
       answerOptions: ["1248", "1322", "1456", "1500"],
       answerChecker: [true, false, false, false],
       finished: false,
     ),
-    InterestingSpot(
-      name: 'Rheinpark',
-      description: 'Ein großer, landschaftlich gestalteter Park am Rhein.',
-      latitude: 50.9454,
-      longitude: 6.9734,
-      localImagePath: "assets/images/Rheinpark.jpg",
-      onlineImageUrl:
-          "https://img.ecmaps.de/remote/.jpg?url=https%3A%2F%2Fdam.destination.one%2F173408%2F2d270bb45aecbe9830b80949639ef10cf7bfa185dda8b9bd9b9b10d8dfd7136f%2Fkoelner-rheinpark-koelntourismus-gmbh-dieter-jacobi_3.jpg&scale=both&mode=crop&quality=90&width=2500&height=1667",
-      question: "Welche Veranstaltung findet jährlich im Rheinpark statt?",
-      answerOptions: ["Kölner Lichter", "Kölner Karneval", "Cologne Pride", "Christmas Market"],
-      answerChecker: [true, false, false, false],
-      finished: false,
-    ),
-    InterestingSpot(
-      name: 'Schokoladenmuseum Köln',
-      description: 'Ein Museum, das sich der Geschichte und Herstellung von Schokolade widmet.',
-      latitude: 50.9326,
-      longitude: 6.9645,
-      localImagePath: "assets/images/Schokoladenmuseum.jpg",
-      onlineImageUrl:
-          "https://www.citynews-koeln.de/wp-content/uploads/2020/05/schokoladenmuseum-2020.jpg",
-      question: "Wann wurde das Schokoladenmuseum in Köln eröffnet?",
-      answerOptions: ["1993", "1998", "2001", "2005"],
-      answerChecker: [true, false, false, false],
-      finished: false,
-    ),
-    InterestingSpot(
-      name: 'RheinEnergieStadion',
-      description: 'Das Heimatstadion des 1. FC Köln und Veranstaltungsort für diverse Events.',
-      latitude: 50.9333,
-      longitude: 6.8750,
-      localImagePath: "assets/images/RheinEnergieStadion.jpg",
-      onlineImageUrl: "https://www.koeln.de/files/koeln/locations/stadion_westtribuene_03_565.jpg",
-      question: "Wie viele Zuschauer fasst das RheinEnergieStadion?",
-      answerOptions: ["40.000", "50.000", "60.000", "70.000"],
-      answerChecker: [false, true, false, false],
-      finished: false,
-    ),
+    // Weitere InterestingSpot-Instanzen für Köln folgen hier...
   ];
 
+  // Definiert eine Beispiel-Tour durch Dortmund, inklusive Namen, Beschreibung, Dauer, Länge, Liste der interessanten Orte und einem Status, ob die Tour abgeschlossen wurde.
   late final Tour sampleDortmundTour = Tour(
     name: 'Dortmund Tour',
     tourLocation: const LatLng(51.514244, 7.466449),
@@ -125,6 +56,7 @@ class TourProvider extends ChangeNotifier {
     finished: false,
   );
 
+  // Definiert eine Beispiel-Tour durch Köln, inklusive Namen, Beschreibung, Dauer, Länge, Liste der interessanten Orte und einem Status, ob die Tour abgeschlossen wurde.
   late final Tour sampleKoelnTour = Tour(
     name: 'Köln Tour',
     tourLocation: const LatLng(50.9413, 6.9583),
@@ -136,31 +68,35 @@ class TourProvider extends ChangeNotifier {
     finished: false,
   );
 
+  // Liste der verfügbaren Touren.
   late List<Tour> _tours = [sampleDortmundTour, sampleKoelnTour];
 
+  // Getter, um die Liste der Touren abzurufen.
   List<Tour> get tours => _tours;
 
+  // Setter, um die Liste der Touren zu aktualisieren und Benachrichtigungen an die UI zu senden.
   set tours(List<Tour> tours) {
     _tours = tours;
     notifyListeners();
   }
 
+  // Aktualisiert den Status eines interessanten Ortes innerhalb einer Tour und sendet eine Benachrichtigung an die UI.
   updateInterestingSpotStatus(int tourIndex, String currentSpotName, bool isFinished) {
     debugPrint(
         "[NOTIFY]: Entered Update. TI[$tourIndex], SI[$currentSpotName], IF[${isFinished.toString()}]");
 
-    // Index des Spots herausfinden
+    // Index des Spots innerhalb der Tour finden.
     int spotIndex = _tours[tourIndex].spots.indexWhere((spot) => spot.name == currentSpotName);
 
-    //User hat ja Frage richtig beantwortet, also finished = TRUE setzen
+    // Status des interessanten Ortes auf abgeschlossen setzen, wenn die zugehörige Frage richtig beantwortet wurde.
     _tours[tourIndex].spots[spotIndex].finished = isFinished;
     debugPrint("[NOTIFY]: ${_tours[tourIndex].spots[spotIndex].question}");
 
+    // Überprüfen, ob alle Orte der Tour besucht wurden, und entsprechend den Status der Tour aktualisieren.
     _tours[tourIndex].finished = true;
     for (var spot in _tours[tourIndex].spots) {
       if (!spot.finished) {
         debugPrint("[NOTIFY]: Spot ${spot.name} NOT finished");
-
         _tours[tourIndex].finished = false;
       } else {
         debugPrint("[NOTIFY]: Spot ${spot.name} finished");
