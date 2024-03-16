@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:histoury/shared/models/interesting_spot.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../shared/models/tour.dart';
 
@@ -8,13 +9,12 @@ import '../shared/models/tour.dart';
 class TourProvider extends ChangeNotifier {
   // Liste der interessanten Orte in Dortmund.
   late final List<InterestingSpot> _dortmundSpots = [
-    // Definiert einen interessanten Ort mit Namen, Beschreibung, Koordinaten, Pfad zu lokalen und Online-Bildern, einer Frage mit Antwortmöglichkeiten und einem Status, ob der Ort als besucht markiert wurde.
     InterestingSpot(
       name: 'Deutsches Fußballmuseum',
       description: 'Museum über die Geschichte des deutschen Fußballs.',
       latitude: 51.5154,
       longitude: 7.4653,
-      localImagePath: "assets/images/DeutschesFußballmuseum.jpg",
+      localImagePath: "assets/DeutschesFussballmuseum.jpg",
       onlineImageUrl:
           "https://m.spox.com/de/sport/fussball/1805/Bilder/deutsches-fussballmuseum-600.jpg",
       question: "Wann wurde das Deutsche Fußballmuseum eröffnet?",
@@ -22,26 +22,99 @@ class TourProvider extends ChangeNotifier {
       answerChecker: [false, true, false, false],
       finished: false,
     ),
-    // Weitere InterestingSpot-Instanzen folgen hier...
+    InterestingSpot(
+      name: 'Westfalenpark Dortmund',
+      description: 'Ein großer Park mit Veranstaltungen und Attraktionen.',
+      latitude: 51.4902,
+      longitude: 7.4937,
+      localImagePath: "assets/Westfalenpark.jpg",
+      onlineImageUrl:
+          "https://www.bergbahnen.org/gallery/albums/deutschland/dortmund/dortmund033.jpg",
+      question: "Welches berühmte Bauwerk befindet sich im Westfalenpark?",
+      answerOptions: ["Florianturm", "Kölner Dom", "Berliner Fernsehturm", "Münchner Olympiaturm"],
+      answerChecker: [true, false, false, false],
+      finished: false,
+    ),
+    InterestingSpot(
+      name: 'Signal Iduna Park',
+      description: 'Heimatstadion von Borussia Dortmund.',
+      latitude: 51.4927,
+      longitude: 7.4518,
+      localImagePath: "assets/SignalIdunaPark.jpg",
+      onlineImageUrl:
+          "https://i0.wp.com/tfcstadiums.com/wp-content/uploads/2022/02/signal-iduna-park-aerial-night-ucl-2.jpg?fit=1376%2C868&ssl=1",
+      question: "Für welchen Fußballverein ist der Signal Iduna Park das Heimstadion?",
+      answerOptions: ["FC Schalke 04", "Borussia Dortmund", "Bayern München", "Bayer Leverkusen"],
+      answerChecker: [false, true, false, false, false],
+      finished: false,
+    ),
+    InterestingSpot(
+      name: 'Phönixsee',
+      description: 'Ein künstlicher See, beliebt für Spaziergänge und Wassersport.',
+      latitude: 51.4793,
+      longitude: 7.5122,
+      localImagePath: "assets/Phoenixsee.jpg",
+      onlineImageUrl:
+          "https://www.wikinger-reisen.de/bilder/reiseseiten/phoenix-see-in-dortmund-head43ep-t.webp",
+      question: "Was war der Phönixsee ursprünglich?",
+      answerOptions: ["Ein Bergwerk", "Ein Natursee", "Ein Freizeitpark", "Ein Flughafen"],
+      answerChecker: [true, false, false, false],
+      finished: false,
+    ),
   ];
 
-  // Liste der interessanten Orte in Köln.
   late final List<InterestingSpot> _koelnSpots = [
-    // Definiert einen interessanten Ort mit Namen, Beschreibung, Koordinaten, Pfad zu lokalen und Online-Bildern, einer Frage mit Antwortmöglichkeiten und einem Status, ob der Ort als besucht markiert wurde.
     InterestingSpot(
       name: 'Kölner Dom',
       description: 'Ein berühmtes gotisches Wahrzeichen und Kathedrale Kölns.',
       latitude: 50.9413,
       longitude: 6.9583,
-      localImagePath: "assets/images/KoelnerDom.jpg",
+      localImagePath: "assets/KoelnerDom.jpg",
       onlineImageUrl:
-          "https://img.ecmaps.de/remote/.jpg?url=https%3A%2F%2Fdam.destination.one%2F173310%2Fa164ccdb16477a3e603eec59c03627fdceb8528eb2c37005bde78f5d8fe4f23d%2Fkoelner-dom-koelntourismus-gmbh-axel-schulten.jpg",
+          "https://img.ecmaps.de/remote/.jpg?url=https%3A%2F%2Fdam.destination.one%2F173310%2Fa164ccdb16477a3e603eec59c03627fdceb8528eb2c37005bde78f5d8fe4f23d%2Fkoelner-dom-koelntourismus-gmbh-axel-schulten.jpg&scale=both&mode=crop&quality=90&width=1356&height=1920",
       question: "Wann wurde mit dem Bau des Kölner Doms begonnen?",
       answerOptions: ["1248", "1322", "1456", "1500"],
       answerChecker: [true, false, false, false],
       finished: false,
     ),
-    // Weitere InterestingSpot-Instanzen für Köln folgen hier...
+    InterestingSpot(
+      name: 'Rheinpark',
+      description: 'Ein großer, landschaftlich gestalteter Park am Rhein.',
+      latitude: 50.9454,
+      longitude: 6.9734,
+      localImagePath: "assets/Rheinpark.jpg",
+      onlineImageUrl:
+          "https://img.ecmaps.de/remote/.jpg?url=https%3A%2F%2Fdam.destination.one%2F173408%2F2d270bb45aecbe9830b80949639ef10cf7bfa185dda8b9bd9b9b10d8dfd7136f%2Fkoelner-rheinpark-koelntourismus-gmbh-dieter-jacobi_3.jpg&scale=both&mode=crop&quality=90&width=2500&height=1667",
+      question: "Welche Veranstaltung findet jährlich im Rheinpark statt?",
+      answerOptions: ["Kölner Lichter", "Kölner Karneval", "Cologne Pride", "Christmas Market"],
+      answerChecker: [true, false, false, false],
+      finished: false,
+    ),
+    InterestingSpot(
+      name: 'Schokoladenmuseum Köln',
+      description: 'Ein Museum, das sich der Geschichte und Herstellung von Schokolade widmet.',
+      latitude: 50.9326,
+      longitude: 6.9645,
+      localImagePath: "assets/Schokoladenmuseum.jpg",
+      onlineImageUrl:
+          "https://www.citynews-koeln.de/wp-content/uploads/2020/05/schokoladenmuseum-2020.jpg",
+      question: "Wann wurde das Schokoladenmuseum in Köln eröffnet?",
+      answerOptions: ["1993", "1998", "2001", "2005"],
+      answerChecker: [true, false, false, false],
+      finished: false,
+    ),
+    InterestingSpot(
+      name: 'RheinEnergieStadion',
+      description: 'Das Heimatstadion des 1. FC Köln und Veranstaltungsort für diverse Events.',
+      latitude: 50.9333,
+      longitude: 6.8750,
+      localImagePath: "assets/RheinEnergieStadion.jpg",
+      onlineImageUrl: "https://www.koeln.de/files/koeln/locations/stadion_westtribuene_03_565.jpg",
+      question: "Wie viele Zuschauer fasst das RheinEnergieStadion?",
+      answerOptions: ["40.000", "50.000", "60.000", "70.000"],
+      answerChecker: [false, true, false, false],
+      finished: false,
+    ),
   ];
 
   // Definiert eine Beispiel-Tour durch Dortmund, inklusive Namen, Beschreibung, Dauer, Länge, Liste der interessanten Orte und einem Status, ob die Tour abgeschlossen wurde.
@@ -80,6 +153,58 @@ class TourProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  //Konstruktor
+  TourProvider() {
+    loadProgress().then(
+      (_) => notifyListeners(),
+    );
+  }
+
+  // Diese Methode setzt alle Touren und ihre Spots zurück
+  Future<void> resetTours() async {
+    final prefs = await SharedPreferences.getInstance();
+    for (var tour in _tours) {
+      // Setze den Fortschritt jedes interessanten Ortes in der Tour zurück
+      for (var spot in tour.spots) {
+        spot.finished = false; // Setzt den Fortschrittsstatus zurück
+        // Optional: Entferne den Fortschritt aus den SharedPreferences
+        String key = "tour_${tour.name}_spot_${spot.name}";
+        await prefs.remove(key);
+      }
+      // Optional: Setze den Tour-Fortschrittsstatus zurück
+      tour.finished = false;
+    }
+    // Informiere die UI über die Änderung
+    notifyListeners();
+  }
+
+  //Laden des Fortschritts einer Tour
+  Future<void> loadProgress() async {
+    final prefs = await SharedPreferences.getInstance();
+    for (var tour in _tours) {
+      bool allSpotsFinished = true; // Starte mit der Annahme, dass alle Spots fertig sind
+      for (var spot in tour.spots) {
+        String key = "tour_${tour.name}_spot_${spot.name}";
+        bool finished = prefs.getBool(key) ?? false;
+        spot.finished = finished;
+        if (!finished) {
+          allSpotsFinished =
+              false; // Wenn ein Spot nicht fertig ist, setze allSpotsFinished auf false
+        }
+      }
+      // Setze den finished-Status der Tour basierend auf allSpotsFinished
+      tour.finished = allSpotsFinished;
+    }
+    notifyListeners(); // Benachrichtige Listener nach dem Laden des Fortschritts
+  }
+
+  //Speichern des Fortschritts einer Tour
+  Future<void> saveProgress(int tourIndex, String currentSpotName, bool isFinished) async {
+    final prefs = await SharedPreferences.getInstance();
+    String key = "tour_${_tours[tourIndex].name}_spot_$currentSpotName";
+    await prefs.setBool(key, isFinished);
+  }
+
   // Aktualisiert den Status eines interessanten Ortes innerhalb einer Tour und sendet eine Benachrichtigung an die UI.
   updateInterestingSpotStatus(int tourIndex, String currentSpotName, bool isFinished) {
     debugPrint(
@@ -104,6 +229,10 @@ class TourProvider extends ChangeNotifier {
     }
     debugPrint("[NOTIFY]: Whole tour finished? ${_tours[tourIndex].finished.toString()}");
     debugPrint("[NOTIFY]: ---------------------------------------");
+    debugPrint("[NOTIFY]: Save progress of Tour");
+    saveProgress(tourIndex, currentSpotName, isFinished)
+        .then((_) => debugPrint("[NOTIFY]: Progress saved"));
+    debugPrint("[NOTIFY]: Notifiying listeners");
     notifyListeners();
   }
 }

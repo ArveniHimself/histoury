@@ -81,10 +81,10 @@ class _SpotQuizSheetState extends State<SpotQuizSheet> {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 notify == -1
-                    ? "Wrong answer"
+                    ? "Falsche Anwort"
                     : notify == 1
-                        ? "Right answer"
-                        : "Select the right answer.",
+                        ? "Richtige Antwort"
+                        : "Wähle eine Antwormöglichkeit.",
                 style: TextStyle(
                   color: notify == -1
                       ? Colors.red

@@ -65,7 +65,7 @@ class _MapWithSpotsState extends State<MapWithSpots> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Spots of ${widget.detailedTour.name}",
+          "Sehenswürdigkeiten der ${widget.detailedTour.name}",
           style: const TextStyle(color: Colors.white),
         ),
         centerTitle: true,
@@ -101,7 +101,7 @@ class _MapWithSpotsState extends State<MapWithSpots> {
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Text(
-                    "Tour finished: ${Provider.of<TourProvider>(context).tours[tourIndex].finished.toString().toUpperCase()}"),
+                    "Tour beendet: ${checkTourFinished(Provider.of<TourProvider>(context).tours[tourIndex].finished)}"),
               ),
             ),
           ),
@@ -109,4 +109,8 @@ class _MapWithSpotsState extends State<MapWithSpots> {
       ),
     );
   }
+}
+
+String checkTourFinished(bool val) {
+  return val ? "Ja" : "Nein";
 }

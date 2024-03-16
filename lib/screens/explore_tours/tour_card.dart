@@ -21,7 +21,6 @@ class _TourCardState extends State<TourCard> {
     return GestureDetector(
       onTap: () {
         final tourProvider = Provider.of<TourProvider>(context, listen: false);
-
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) {
@@ -54,14 +53,7 @@ class _TourCardState extends State<TourCard> {
                   Padding(
                     padding: const EdgeInsets.all(10),
                     child: Text(
-                      'Distanz: ${widget.tour.lengthInKm.toStringAsFixed(0)} km',
-                      style: const TextStyle(color: Colors.black),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Text(
-                      'Die Tour enthält: ${widget.tour.spots.length} interessante Spots',
+                      'Die Tour enthält: ${widget.tour.spots.length} interessante Sehenswürdigkeiten',
                       style: const TextStyle(color: Colors.black),
                     ),
                   ),
@@ -76,6 +68,13 @@ class _TourCardState extends State<TourCard> {
                       style: const TextStyle(color: Colors.black),
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      'Distanz: ${widget.tour.lengthInKm.toStringAsFixed(0)} km',
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                  ),
                 ],
               ),
               Row(
@@ -86,7 +85,7 @@ class _TourCardState extends State<TourCard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                            "Tour finished: ${Provider.of<TourProvider>(context).tours[tourIndex].finished.toString().toUpperCase()}")
+                            "Tour beendet: ${checkTourFinished(Provider.of<TourProvider>(context).tours[tourIndex].finished)}")
                       ],
                     ),
                   ),
@@ -98,4 +97,8 @@ class _TourCardState extends State<TourCard> {
       ),
     );
   }
+}
+
+String checkTourFinished(bool val) {
+  return val ? "Ja" : "Nein";
 }

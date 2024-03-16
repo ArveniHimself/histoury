@@ -24,17 +24,28 @@ class _DiscoverToursState extends State<DiscoverTours> {
         leading: const SizedBox.shrink(),
         centerTitle: true,
         title: const Text(
-          "Explore Tours",
+          "Entdecke Touren",
           style: TextStyle(color: Colors.white),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.restore_page),
+            onPressed: () {
+              final tourProvider = Provider.of<TourProvider>(context, listen: false);
+              tourProvider.resetTours();
+            },
+          )
+        ],
       ),
       body: ListView.builder(
         itemCount: Provider.of<TourProvider>(context, listen: false).tours.length,
         itemBuilder: (BuildContext context, int index) {
           // Hole die aktuelle Tour aus der Liste
-          final currentTour = Provider.of<TourProvider>(context, listen: false).tours[index];
+          // final currentTour = Provider.of<TourProvider>(context, listen: false).tours[index];
           //alle Touren
           final tourProvider = Provider.of<TourProvider>(context, listen: false);
+
+          final currentTour = tourProvider.tours[index];
           // Gib eine TourCard zurück, die die Daten der aktuellen Tour darstellt
           return ChangeNotifierProvider.value(
             value: tourProvider,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:histoury/screens/map_page/map_with_spots.dart';
+import 'package:histoury/screens/map_page/qr_scan_page.dart';
 import 'package:histoury/shared/models/tour.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,23 @@ class TourDetailsPage extends StatelessWidget {
           detailedTour.name,
           style: const TextStyle(color: Colors.white),
         ),
+        // actions: [
+        //   ElevatedButton(
+        //     style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+        //     onPressed: () async {
+        //       String? scannedCode = await Navigator.push(
+        //         context,
+        //         MaterialPageRoute(builder: (context) => const QRScanPage()),
+        //       );
+
+        //       if (scannedCode != null) {
+        //         // Hier Logik zum Überprüfen des gescannten Codes und zum Aktualisieren der App
+        //         // Beispiel: tourProvider.updateInterestingSpotStatus(...);
+        //       }
+        //     },
+        //     child: const Text('Scan QR-Code'),
+        //   )
+        // ],
       ),
       body: ListView(
         padding: const EdgeInsets.all(10),
@@ -40,26 +58,31 @@ class TourDetailsPage extends StatelessWidget {
                             ? Colors.white
                             : Colors.black),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 15),
                   Text(
                     detailedTour.description,
                     style: const TextStyle(fontSize: 18),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 15),
                   Text(
-                    'Duration: ${detailedTour.duration.inHours} hours ${detailedTour.duration.inMinutes.remainder(60)} minutes',
-                    style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                    'Dauer: ${detailedTour.duration.inHours} Stunden ${detailedTour.duration.inMinutes.remainder(60)} Minuten',
+                    style: const TextStyle(fontSize: 16),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 15),
                   Text(
-                    'Length: ${detailedTour.lengthInKm.toStringAsFixed(2)} km',
-                    style: const TextStyle(fontSize: 16, fontStyle: FontStyle.italic),
+                    'Länge: ${detailedTour.lengthInKm.toStringAsFixed(2)} km',
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(height: 15),
+                  Text(
+                    'Beendet: ${checkTourFinished(detailedTour.finished)}',
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ],
               ),
             ),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 15),
           Card(
             elevation: 4.0,
             child: Padding(
@@ -68,7 +91,7 @@ class TourDetailsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Interesting Spots',
+                    'Interessante Sehenswürdigkeiten',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
@@ -79,7 +102,7 @@ class TourDetailsPage extends StatelessWidget {
                         leading: SizedBox(
                           width: 90,
                           height: 90,
-                          child: Image.network(spot.onlineImageUrl),
+                          child: Image.asset(spot.localImagePath),
                         ),
                         title: Text(spot.name),
                       ),
@@ -104,8 +127,8 @@ class TourDetailsPage extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.indigo, // background
-                foregroundColor: Colors.white, // foreground
+                backgroundColor: Colors.indigo, // Hintergrund
+                foregroundColor: Colors.white, // Vordergrund
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -120,4 +143,8 @@ class TourDetailsPage extends StatelessWidget {
       ),
     );
   }
+}
+
+String checkTourFinished(bool val) {
+  return val ? "Ja" : "Nein";
 }
