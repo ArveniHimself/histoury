@@ -15,8 +15,6 @@ class TourProvider extends ChangeNotifier {
       latitude: 51.5154,
       longitude: 7.4653,
       localImagePath: "assets/DeutschesFussballmuseum.jpg",
-      onlineImageUrl:
-          "https://m.spox.com/de/sport/fussball/1805/Bilder/deutsches-fussballmuseum-600.jpg",
       question: "Wann wurde das Deutsche Fußballmuseum eröffnet?",
       answerOptions: ["2013", "2015", "2017", "2019"],
       answerChecker: [false, true, false, false],
@@ -28,8 +26,6 @@ class TourProvider extends ChangeNotifier {
       latitude: 51.4902,
       longitude: 7.4937,
       localImagePath: "assets/Westfalenpark.jpg",
-      onlineImageUrl:
-          "https://www.bergbahnen.org/gallery/albums/deutschland/dortmund/dortmund033.jpg",
       question: "Welches berühmte Bauwerk befindet sich im Westfalenpark?",
       answerOptions: ["Florianturm", "Kölner Dom", "Berliner Fernsehturm", "Münchner Olympiaturm"],
       answerChecker: [true, false, false, false],
@@ -41,8 +37,6 @@ class TourProvider extends ChangeNotifier {
       latitude: 51.4927,
       longitude: 7.4518,
       localImagePath: "assets/SignalIdunaPark.jpg",
-      onlineImageUrl:
-          "https://i0.wp.com/tfcstadiums.com/wp-content/uploads/2022/02/signal-iduna-park-aerial-night-ucl-2.jpg?fit=1376%2C868&ssl=1",
       question: "Für welchen Fußballverein ist der Signal Iduna Park das Heimstadion?",
       answerOptions: ["FC Schalke 04", "Borussia Dortmund", "Bayern München", "Bayer Leverkusen"],
       answerChecker: [false, true, false, false, false],
@@ -54,8 +48,6 @@ class TourProvider extends ChangeNotifier {
       latitude: 51.4793,
       longitude: 7.5122,
       localImagePath: "assets/Phoenixsee.jpg",
-      onlineImageUrl:
-          "https://www.wikinger-reisen.de/bilder/reiseseiten/phoenix-see-in-dortmund-head43ep-t.webp",
       question: "Was war der Phönixsee ursprünglich?",
       answerOptions: ["Ein Bergwerk", "Ein Natursee", "Ein Freizeitpark", "Ein Flughafen"],
       answerChecker: [true, false, false, false],
@@ -70,8 +62,6 @@ class TourProvider extends ChangeNotifier {
       latitude: 50.9413,
       longitude: 6.9583,
       localImagePath: "assets/KoelnerDom.jpg",
-      onlineImageUrl:
-          "https://img.ecmaps.de/remote/.jpg?url=https%3A%2F%2Fdam.destination.one%2F173310%2Fa164ccdb16477a3e603eec59c03627fdceb8528eb2c37005bde78f5d8fe4f23d%2Fkoelner-dom-koelntourismus-gmbh-axel-schulten.jpg&scale=both&mode=crop&quality=90&width=1356&height=1920",
       question: "Wann wurde mit dem Bau des Kölner Doms begonnen?",
       answerOptions: ["1248", "1322", "1456", "1500"],
       answerChecker: [true, false, false, false],
@@ -83,8 +73,6 @@ class TourProvider extends ChangeNotifier {
       latitude: 50.9454,
       longitude: 6.9734,
       localImagePath: "assets/Rheinpark.jpg",
-      onlineImageUrl:
-          "https://img.ecmaps.de/remote/.jpg?url=https%3A%2F%2Fdam.destination.one%2F173408%2F2d270bb45aecbe9830b80949639ef10cf7bfa185dda8b9bd9b9b10d8dfd7136f%2Fkoelner-rheinpark-koelntourismus-gmbh-dieter-jacobi_3.jpg&scale=both&mode=crop&quality=90&width=2500&height=1667",
       question: "Welche Veranstaltung findet jährlich im Rheinpark statt?",
       answerOptions: ["Kölner Lichter", "Kölner Karneval", "Cologne Pride", "Christmas Market"],
       answerChecker: [true, false, false, false],
@@ -96,8 +84,6 @@ class TourProvider extends ChangeNotifier {
       latitude: 50.9326,
       longitude: 6.9645,
       localImagePath: "assets/Schokoladenmuseum.jpg",
-      onlineImageUrl:
-          "https://www.citynews-koeln.de/wp-content/uploads/2020/05/schokoladenmuseum-2020.jpg",
       question: "Wann wurde das Schokoladenmuseum in Köln eröffnet?",
       answerOptions: ["1993", "1998", "2001", "2005"],
       answerChecker: [true, false, false, false],
@@ -109,7 +95,6 @@ class TourProvider extends ChangeNotifier {
       latitude: 50.9333,
       longitude: 6.8750,
       localImagePath: "assets/RheinEnergieStadion.jpg",
-      onlineImageUrl: "https://www.koeln.de/files/koeln/locations/stadion_westtribuene_03_565.jpg",
       question: "Wie viele Zuschauer fasst das RheinEnergieStadion?",
       answerOptions: ["40.000", "50.000", "60.000", "70.000"],
       answerChecker: [false, true, false, false],

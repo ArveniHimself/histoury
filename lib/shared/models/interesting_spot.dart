@@ -3,7 +3,6 @@ class InterestingSpot {
   final String description;
   final double latitude; // Breitengrad
   final double longitude; // Längengrad
-  final String onlineImageUrl;
   final String localImagePath;
   final String question;
   final List<String> answerOptions;
@@ -15,7 +14,6 @@ class InterestingSpot {
     required this.description,
     required this.latitude,
     required this.longitude,
-    required this.onlineImageUrl,
     required this.localImagePath,
     required this.question,
     required this.answerOptions,
