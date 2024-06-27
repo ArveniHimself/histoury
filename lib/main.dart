@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:histoury/screens/explore_tours/discover_tours.dart';
 import 'package:histoury/shared/themes/themes.dart';
-import 'package:histoury/state_management.dart/tour_change_notifier.dart';
+import 'package:histoury/state_management.dart/tour_provider.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {

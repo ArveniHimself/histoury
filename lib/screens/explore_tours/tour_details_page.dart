@@ -4,7 +4,7 @@ import 'package:histoury/screens/map_page/qr_scan_page.dart';
 import 'package:histoury/shared/models/tour.dart';
 import 'package:provider/provider.dart';
 
-import '../../state_management.dart/tour_change_notifier.dart';
+import '../../state_management.dart/tour_provider.dart';
 
 class TourDetailsPage extends StatelessWidget {
   final Tour detailedTour;
@@ -21,29 +21,36 @@ class TourDetailsPage extends StatelessWidget {
           detailedTour.name,
           style: const TextStyle(color: Colors.white),
         ),
-        // actions: [
-        //   ElevatedButton(
-        //     style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-        //     onPressed: () async {
-        //       String? scannedCode = await Navigator.push(
-        //         context,
-        //         MaterialPageRoute(builder: (context) => const QRScanPage()),
-        //       );
+        actions: [
+          OutlinedButton(
+            style: OutlinedButton.styleFrom(
+              backgroundColor: Colors.transparent, // Set background to transparent
+              side: const BorderSide(color: Colors.transparent), // White border
+              textStyle: const TextStyle(
+                  color: Colors.white), // Text color (not necessary with foregroundColor)
+              foregroundColor: Colors.white, // Ensures text and icon(if any) are white
+            ),
+            onPressed: () async {
+              String? scannedCode = await Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const QRScanPage()),
+              );
 
-        //       if (scannedCode != null) {
-        //         // Hier Logik zum Überprüfen des gescannten Codes und zum Aktualisieren der App
-        //         // Beispiel: tourProvider.updateInterestingSpotStatus(...);
-        //       }
-        //     },
-        //     child: const Text('Scan QR-Code'),
-        //   )
-        // ],
+              if (scannedCode != null) {
+                // Logic to verify the scanned code and update the app
+                // Example: tourProvider.updateInterestingSpotStatus(...);
+              }
+              debugPrint("$scannedCode QR-Code detected");
+            },
+            child: const Text('Scan Code'),
+          )
+        ],
       ),
       body: ListView(
         padding: const EdgeInsets.all(10),
         children: [
           Card(
-            elevation: 4.0,
+            elevation: 1,
             child: Padding(
               padding: const EdgeInsets.all(15),
               child: Column(
@@ -84,9 +91,9 @@ class TourDetailsPage extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           Card(
-            elevation: 4.0,
+            elevation: 1,
             child: Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -94,14 +101,15 @@ class TourDetailsPage extends StatelessWidget {
                     'Interessante Sehenswürdigkeiten',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 15),
                   for (var spot in detailedTour.spots)
                     Padding(
                       padding: const EdgeInsets.only(bottom: 5),
                       child: ListTile(
+                        contentPadding: const EdgeInsets.all(0),
                         leading: SizedBox(
-                          width: 90,
-                          height: 90,
+                          width: 100,
+                          height: 100,
                           child: Image.asset(spot.localImagePath),
                         ),
                         title: Text(spot.name),

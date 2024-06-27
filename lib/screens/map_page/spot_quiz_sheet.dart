@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:histoury/shared/models/tour.dart';
 import 'package:provider/provider.dart';
 
-import '../../state_management.dart/tour_change_notifier.dart';
+import '../../state_management.dart/tour_provider.dart';
 import '../../shared/models/interesting_spot.dart';
 
 class SpotQuizSheet extends StatefulWidget {

@@ -5,7 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:histoury/screens/map_page/spot_quiz_sheet.dart';
 import 'package:provider/provider.dart';
 
-import '../../state_management.dart/tour_change_notifier.dart';
+import '../../state_management.dart/tour_provider.dart';
 import '../../shared/models/tour.dart';
 
 class MapWithSpots extends StatefulWidget {

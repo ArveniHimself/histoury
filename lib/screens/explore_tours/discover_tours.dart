@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:histoury/screens/explore_tours/tour_card.dart';
 import 'package:histoury/shared/models/tour.dart';
-import 'package:histoury/state_management.dart/tour_change_notifier.dart';
+import 'package:histoury/state_management.dart/tour_provider.dart';
 import 'package:provider/provider.dart';
 
 class DiscoverTours extends StatefulWidget {
@@ -28,13 +28,18 @@ class _DiscoverToursState extends State<DiscoverTours> {
           style: TextStyle(color: Colors.white),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.restore_page),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.indigo, // Hintergrundfarbe
+              textStyle: const TextStyle(color: Colors.black), // Textfarbe
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            ),
             onPressed: () {
               final tourProvider = Provider.of<TourProvider>(context, listen: false);
               tourProvider.resetTours();
             },
-          )
+            child: const Text("Clear"),
+          ),
         ],
       ),
       body: ListView.builder(

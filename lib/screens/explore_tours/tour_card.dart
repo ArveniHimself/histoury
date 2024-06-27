@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:histoury/state_management.dart/tour_change_notifier.dart';
+import 'package:histoury/state_management.dart/tour_provider.dart';
 import 'package:histoury/shared/models/tour.dart';
 import 'package:histoury/screens/explore_tours/tour_details_page.dart';
 import 'package:provider/provider.dart';

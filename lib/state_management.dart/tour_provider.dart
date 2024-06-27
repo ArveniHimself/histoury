@@ -190,6 +190,13 @@ class TourProvider extends ChangeNotifier {
     await prefs.setBool(key, isFinished);
   }
 
+  //Besuch eines Ortes speichern
+  Future<void> saveVisit(int tourIndex, String currentSpotName) async {
+    final prefs = await SharedPreferences.getInstance();
+    String key = "tour_${_tours[tourIndex].name}_spot_${currentSpotName}_visited";
+    await prefs.setBool(key, true);
+  }
+
   // Aktualisiert den Status eines interessanten Ortes innerhalb einer Tour und sendet eine Benachrichtigung an die UI.
   updateInterestingSpotStatus(int tourIndex, String currentSpotName, bool isFinished) {
     debugPrint(
