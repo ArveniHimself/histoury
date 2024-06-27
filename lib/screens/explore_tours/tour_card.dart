@@ -35,7 +35,7 @@ class _TourCardState extends State<TourCard> {
         padding: const EdgeInsets.all(8.0),
         child: Card(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(5),
             // Untere rechte Ecke abgerundet
           ),
           color: Colors.white,
@@ -85,7 +85,7 @@ class _TourCardState extends State<TourCard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                            "Tour beendet: ${checkTourFinished(Provider.of<TourProvider>(context).tours[tourIndex].finished)}")
+                            "Quizze beendet: ${checkTourFinished(Provider.of<TourProvider>(context).tours[tourIndex].finished)}")
                       ],
                     ),
                   ),

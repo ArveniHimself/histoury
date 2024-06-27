@@ -8,6 +8,7 @@ class InterestingSpot {
   final List<String> answerOptions;
   final List<bool> answerChecker;
   bool finished;
+  bool visited;
 
   InterestingSpot({
     required this.name,
@@ -19,5 +20,6 @@ class InterestingSpot {
     required this.answerOptions,
     required this.answerChecker,
     required this.finished,
+    required this.visited,
   });
 }

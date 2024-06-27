@@ -20,6 +20,7 @@ class _DiscoverToursState extends State<DiscoverTours> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[350],
       appBar: AppBar(
         leading: const SizedBox.shrink(),
         centerTitle: true,
@@ -30,6 +31,7 @@ class _DiscoverToursState extends State<DiscoverTours> {
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
+              elevation: 0,
               backgroundColor: Colors.indigo, // Hintergrundfarbe
               textStyle: const TextStyle(color: Colors.black), // Textfarbe
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -38,15 +40,16 @@ class _DiscoverToursState extends State<DiscoverTours> {
               final tourProvider = Provider.of<TourProvider>(context, listen: false);
               tourProvider.resetTours();
             },
-            child: const Text("Clear"),
+            child: const Text(
+              "Zurücksetzen",
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ],
       ),
       body: ListView.builder(
         itemCount: Provider.of<TourProvider>(context, listen: false).tours.length,
         itemBuilder: (BuildContext context, int index) {
-          // Hole die aktuelle Tour aus der Liste
-          // final currentTour = Provider.of<TourProvider>(context, listen: false).tours[index];
           //alle Touren
           final tourProvider = Provider.of<TourProvider>(context, listen: false);
 

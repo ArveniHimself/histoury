@@ -19,6 +19,7 @@ class TourProvider extends ChangeNotifier {
       answerOptions: ["2013", "2015", "2017", "2019"],
       answerChecker: [false, true, false, false],
       finished: false,
+      visited: false,
     ),
     InterestingSpot(
       name: 'Westfalenpark Dortmund',
@@ -30,6 +31,7 @@ class TourProvider extends ChangeNotifier {
       answerOptions: ["Florianturm", "Kölner Dom", "Berliner Fernsehturm", "Münchner Olympiaturm"],
       answerChecker: [true, false, false, false],
       finished: false,
+      visited: false,
     ),
     InterestingSpot(
       name: 'Signal Iduna Park',
@@ -41,6 +43,7 @@ class TourProvider extends ChangeNotifier {
       answerOptions: ["FC Schalke 04", "Borussia Dortmund", "Bayern München", "Bayer Leverkusen"],
       answerChecker: [false, true, false, false, false],
       finished: false,
+      visited: false,
     ),
     InterestingSpot(
       name: 'Phönixsee',
@@ -52,6 +55,7 @@ class TourProvider extends ChangeNotifier {
       answerOptions: ["Ein Bergwerk", "Ein Natursee", "Ein Freizeitpark", "Ein Flughafen"],
       answerChecker: [true, false, false, false],
       finished: false,
+      visited: false,
     ),
   ];
 
@@ -66,6 +70,7 @@ class TourProvider extends ChangeNotifier {
       answerOptions: ["1248", "1322", "1456", "1500"],
       answerChecker: [true, false, false, false],
       finished: false,
+      visited: false,
     ),
     InterestingSpot(
       name: 'Rheinpark',
@@ -77,6 +82,7 @@ class TourProvider extends ChangeNotifier {
       answerOptions: ["Kölner Lichter", "Kölner Karneval", "Cologne Pride", "Christmas Market"],
       answerChecker: [true, false, false, false],
       finished: false,
+      visited: false,
     ),
     InterestingSpot(
       name: 'Schokoladenmuseum Köln',
@@ -88,6 +94,7 @@ class TourProvider extends ChangeNotifier {
       answerOptions: ["1993", "1998", "2001", "2005"],
       answerChecker: [true, false, false, false],
       finished: false,
+      visited: false,
     ),
     InterestingSpot(
       name: 'RheinEnergieStadion',
@@ -99,6 +106,7 @@ class TourProvider extends ChangeNotifier {
       answerOptions: ["40.000", "50.000", "60.000", "70.000"],
       answerChecker: [false, true, false, false],
       finished: false,
+      visited: false,
     ),
   ];
 
@@ -107,7 +115,7 @@ class TourProvider extends ChangeNotifier {
     name: 'Dortmund Tour',
     tourLocation: const LatLng(51.514244, 7.466449),
     description:
-        "Erkunden Sie Dortmund, das Herz des Ruhrgebiets und eine Stadt, die Industriegeschichte mit modernem Leben verbindet. Besichtigen Sie das Deutsche Fußballmuseum und tauchen Sie ein in die leidenschaftliche Welt des deutschen Fußballs. Genießen Sie einen Spaziergang rund um den Phönixsee, einem der beliebtesten Erholungsgebiete der Stadt. Lassen Sie sich von der elektrisierenden Atmosphäre im Signal Iduna Park mitreißen, der Heimat von Borussia Dortmund.",
+        "Erkunden Sie Dortmund, das Herz des Ruhrgebiets und eine Stadt, die Industriegeschichte mit modernem Leben verbindet.",
     duration: const Duration(hours: 4),
     lengthInKm: 20.0,
     spots: _dortmundSpots,
@@ -119,7 +127,7 @@ class TourProvider extends ChangeNotifier {
     name: 'Köln Tour',
     tourLocation: const LatLng(50.9413, 6.9583),
     description:
-        "Entdecken Sie das historische Herz von Köln, einer Stadt, die reich an Kultur und Geschichte ist. Bestaunen Sie den beeindruckenden Kölner Dom, ein Meisterwerk gotischer Architektur und ein UNESCO-Weltkulturerbe. Flanieren Sie entlang des Rheins und erleben Sie die lebendige Atmosphäre der Altstadt mit ihren zahlreichen Brauhäusern und Kneipen. Tauchen Sie in das pulsierende kulturelle Leben der Stadt ein, von den römischen Ruinen bis zu den modernen Kunstgalerien.",
+        "Entdecken Sie das historische Herz von Köln, einer Stadt, die reich an Kultur und Geschichte ist.",
     duration: const Duration(hours: 3),
     lengthInKm: 15.0,
     spots: _koelnSpots,
@@ -141,7 +149,9 @@ class TourProvider extends ChangeNotifier {
   //Konstruktor
   TourProvider() {
     loadProgress().then(
-      (_) => notifyListeners(),
+      (_) => loadVisit().then(
+        (_) => notifyListeners(),
+      ),
     );
   }
 
@@ -152,9 +162,11 @@ class TourProvider extends ChangeNotifier {
       // Setze den Fortschritt jedes interessanten Ortes in der Tour zurück
       for (var spot in tour.spots) {
         spot.finished = false; // Setzt den Fortschrittsstatus zurück
-        // Optional: Entferne den Fortschritt aus den SharedPreferences
+        spot.visited = false;
         String key = "tour_${tour.name}_spot_${spot.name}";
+        String key2 = "tour_${tour.name}_spot_${spot.name}_visited";
         await prefs.remove(key);
+        await prefs.remove(key2);
       }
       // Optional: Setze den Tour-Fortschrittsstatus zurück
       tour.finished = false;
@@ -172,6 +184,7 @@ class TourProvider extends ChangeNotifier {
         String key = "tour_${tour.name}_spot_${spot.name}";
         bool finished = prefs.getBool(key) ?? false;
         spot.finished = finished;
+        debugPrint("Loading Progress: $key -> $finished");
         if (!finished) {
           allSpotsFinished =
               false; // Wenn ein Spot nicht fertig ist, setze allSpotsFinished auf false
@@ -195,6 +208,24 @@ class TourProvider extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     String key = "tour_${_tours[tourIndex].name}_spot_${currentSpotName}_visited";
     await prefs.setBool(key, true);
+    _tours[tourIndex].spots.firstWhere((spot) => spot.name == currentSpotName).visited = true;
+    debugPrint("[Saving Visit] $key -> true");
+    notifyListeners();
+  }
+
+  // Laden des Besuchstatus einer Tour
+  Future<void> loadVisit() async {
+    final prefs = await SharedPreferences.getInstance();
+    for (var tour in _tours) {
+      for (var spot in tour.spots) {
+        String key = "tour_${tour.name}_spot_${spot.name}_visited";
+        bool visited =
+            prefs.getBool(key) ?? false; // Setze visited auf false, wenn kein Wert gefunden wird
+        spot.visited = visited; // Aktualisiere den visited-Status für jeden Spot
+        debugPrint("Loading Visit: $key -> $visited");
+      }
+    }
+    notifyListeners(); // Benachrichtige Listener nach dem Laden des Besuchstatus
   }
 
   // Aktualisiert den Status eines interessanten Ortes innerhalb einer Tour und sendet eine Benachrichtigung an die UI.
@@ -221,7 +252,6 @@ class TourProvider extends ChangeNotifier {
     }
     debugPrint("[NOTIFY]: Whole tour finished? ${_tours[tourIndex].finished.toString()}");
     debugPrint("[NOTIFY]: ---------------------------------------");
-    debugPrint("[NOTIFY]: Save progress of Tour");
     saveProgress(tourIndex, currentSpotName, isFinished)
         .then((_) => debugPrint("[NOTIFY]: Progress saved"));
     debugPrint("[NOTIFY]: Notifiying listeners");

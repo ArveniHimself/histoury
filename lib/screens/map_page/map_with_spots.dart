@@ -70,7 +70,10 @@ class _MapWithSpotsState extends State<MapWithSpots> {
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -83,7 +86,7 @@ class _MapWithSpotsState extends State<MapWithSpots> {
             markers: _googleMapsMarkers,
             initialCameraPosition: CameraPosition(
               target: widget.detailedTour.tourLocation,
-              zoom: 11.5,
+              zoom: 11.75,
             ),
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
@@ -95,13 +98,13 @@ class _MapWithSpotsState extends State<MapWithSpots> {
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: Colors.indigo, width: 2),
+                borderRadius: BorderRadius.circular(0),
+                border: Border.all(color: Colors.indigo, width: 2.5),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Text(
-                    "Tour beendet: ${checkTourFinished(Provider.of<TourProvider>(context).tours[tourIndex].finished)}"),
+                    "Quizze beendet: ${checkTourFinished(Provider.of<TourProvider>(context).tours[tourIndex].finished)}"),
               ),
             ),
           ),

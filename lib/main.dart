@@ -7,14 +7,14 @@ import 'package:provider/provider.dart';
 
 Future<void> main() async {
   runApp(const MyApp());
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent, // Transparente Statusleiste.
-    statusBarIconBrightness:
-        Brightness.dark, // Icons der Statusleiste auf dunkel setzen (für helle Hintergründe).
-    systemNavigationBarColor: Colors.transparent, // Transparente Navigationsleiste.
-    systemNavigationBarIconBrightness:
-        Brightness.dark, // Icons der Navigationsleiste auf dunkel setzen (für helle Hintergründe).
-  ));
+  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+  //   statusBarColor: Colors.transparent, // Transparente Statusleiste.
+  //   statusBarIconBrightness:
+  //       Brightness.dark, // Icons der Statusleiste auf dunkel setzen (für helle Hintergründe).
+  //   systemNavigationBarColor: Colors.transparent, // Transparente Navigationsleiste.
+  //   systemNavigationBarIconBrightness:
+  //       Brightness.dark, // Icons der Navigationsleiste auf dunkel setzen (für helle Hintergründe).
+  // ));
 }
 
 //Die "Hülle" in der die App ist.
